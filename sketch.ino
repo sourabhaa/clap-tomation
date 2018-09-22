@@ -1,48 +1,29 @@
-int soundSensor = 3;
-int relay = 4;
-int claps = 0;
-long detectionSpanInitial = 0;
-long detectionSpan = 0;
-boolean lightState = false;
- 
+int soundSensor=2;
+int LED=4;
+boolean LEDStatus=false;
+
 void setup() {
-  pinMode(soundSensor, INPUT);
-  pinMode(relay, OUTPUT);
+ pinMode(soundSensor,INPUT);
+ pinMode(LED,OUTPUT);
+Serial.begin(9600);
 }
- 
+
 void loop() {
- 
-  int sensorState = digitalRead(soundSensor);
- 
-  if (sensorState == 0)
-  {
-    if (claps == 0)
-    {
-      detectionSpanInitial = detectionSpan = millis();
-      claps++;
+  int sensorValue = analogRead(A0);
+  // print out the value you read:
+  Serial.println(sensorValue);
+  int SensorData=digitalRead(soundSensor); 
+  if(SensorData==0){
+    if(LEDStatus==false){
+        LEDStatus=true;
     }
-    else if (claps > 0 && millis()-detectionSpan >= 50)
-    {
-      detectionSpan = millis();
-      claps++;
+    else LEDStatus=false;
     }
-  }
- 
-  if (millis()-detectionSpanInitial >= 400)
-  {
-    if (claps == 2)
-    {
-      if (!lightState)
-        {
-          lightState = true;
-          digitalWrite(relay, HIGH);
-        }
-        else if (lightState)
-        {
-          lightState = false;
-          digitalWrite(relay, LOW);
-        }
-    }
-    claps = 0;
-  }
-}
+    if(LEDStatus==true){
+      digitalWrite(LED,HIGH);
+    
+  } else
+ {
+  digitalWrite(LED,LOW);
+ }
+ }
