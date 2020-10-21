@@ -1,3 +1,7 @@
+<<<<<<< Music-visualization
+# Music visualisation
+The LEDs make patterns based on a piece of music,synchronising with the music.
+=======
 # Clap-tomation
 
 ## What is this?
@@ -14,3 +18,4 @@ Clap Switch is not restricted to turn the LEDs ON and OFF, but it can be used in
 
 ## Software
 - Ardunio IDE
+>>>>>>> master
